@@ -32,11 +32,12 @@
                                                               width="130">Сделано в HTML Academy</a>в 2017 году</p>
 </footer>
 <script type="text/javascript"> 
-"use strict";
+'use strict';
 
 var fireballSize = 22; 
 var wizardSpeed = 3; 
 var wizardWidth = 70; 
+
 var getFireballSpeed = function(left) { 
   if (left == true) { 
     return 5; 
@@ -44,12 +45,15 @@ var getFireballSpeed = function(left) {
     return 2; 
   } 
 }; 
+
 var getWizardHeight = function (wizardWidth) { 
   return 1.337 * wizardWidth; 
 } 
+
 var getWizardX = function (width) { 
   return width / 2 - 35; 
 } 
+
 var getWizardY = function (height) { 
   return 2 / 3 * height; 
 } 
