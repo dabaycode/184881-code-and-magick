@@ -10,11 +10,11 @@ function getRandomInt(min, max) {
 function getRandomNames(arr, amount) {
   var result = ['Вы'];
 
-  for(var i = 1; i <= amount-1; i++) {
+  for (var i = 1; i <= amount - 1; i++) {
     var randomIndex = getRandomInt(0, arr.length - 1);
     result.push(arr[randomIndex]);
 
-    arr = arr.filter(function(item, index) {
+    arr = arr.filter(function (item, index) {
       return index !== randomIndex;
     });
   }
@@ -25,11 +25,11 @@ function getRandomNames(arr, amount) {
 function getRandomTimes(arr, amount) {
   var result = [];
 
-  for(var i = 1; i <= amount; i++) {
+  for (var i = 1; i <= amount; i++) {
     var randomIndex = getRandomInt(0, arr.length - 1);
     result.push(arr[randomIndex]);
 
-    arr = arr.filter(function(item, index) {
+    arr = arr.filter(function (item, index) {
       return index !== randomIndex;
     });
   }
@@ -52,7 +52,7 @@ var renderStatistics = function (ctx, names, times) {
 
   var max = -1;
 
-  for(var i = 0 ; i < times.length; i++ ) {
+  for (var i = 0; i < times.length; i++) {
     var time = times[i];
     if (time > max) {
       max = time;
@@ -64,9 +64,9 @@ var renderStatistics = function (ctx, names, times) {
   var step = histoHeight / max;
   var columnIndent = 70;
 
-  for (var i = 0; i < times.length; i++) {
+  for (i = 0; i < times.length; i++) {
     var name = names[i];
-    var time = times[i];
+    time = times[i];
 
     var height = step * time;
 
@@ -75,7 +75,7 @@ var renderStatistics = function (ctx, names, times) {
     } else {
       ctx.fillStyle = 'rgba(0,0,' + getRandomInt(100, 255) + ',1)';
     }
-    ctx.fillRect(histoX + columnIndent * i, 270-height-30, 30, height);
+    ctx.fillRect(histoX + columnIndent * i, 270 - height - 30, 30, height);
 
     ctx.fillStyle = '#000';
     ctx.fillText(name + ':' + time.toFixed(0), histoX + columnIndent * i, 100 + histoHeight + 20);
