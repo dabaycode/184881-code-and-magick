@@ -34,10 +34,10 @@ var ENTER_KEY_CODE = 13;
 var ESC_KEY_CODE = 27;
 
 /**
- * anonymous function - Возвращает индекс рандомного элемента массива.
+ * Возвращает индекс рандомного элемента массива.
  *
  * @param  {array} colorsArray - входной массив.
- * @return {number} - индекс ранжомного элемента массива.
+ * @return {number} - индекс рандомного элемента массива.
  */
 var randomColorIndex = function (colorsArray) {
   return (Math.floor(Math.random() * colorsArray.length));
@@ -50,17 +50,9 @@ var randomColorIndex = function (colorsArray) {
  * @param  {array} colorsArray - входной массив цветов.
  * @param  {string} prop - значение изменяего свойства.
  * @param  {object} event - принимает событие click и связанные объекты.
- * @return {undefined} - выход из функции.
  */
 function randomColor(changedNode, colorsArray, prop, event) {
-  if (prop === 'fill') {
-    changedNode.style.fill = colorsArray[randomColorIndex(colorsArray)];
-  }
-  if (prop === 'background') {
-    changedNode.style.background = colorsArray[randomColorIndex(colorsArray)];
-  }
-
-  return;
+  changedNode.style[prop] = colorsArray[randomColorIndex(colorsArray)];
 }
 
 /**
@@ -87,87 +79,51 @@ function addClassAriaHidden(node, newClass) {
   node.setAttribute('aria-hidden', true);
 }
 
-/**
- * anonymous function -  при клике, вызывает функцию addClassAriaHidden.
- * Закрывает окно персонажа
- *
- */
+// при клике, вызывает функцию addClassAriaHidden. Закрывает окно персонажа.
 setupOpen.addEventListener('click', function () {
   removeClassAriaHiddenFalse(setup, 'invisible');
 });
 
-/**
- * anonymous function - при нажатии Enter, вызывает функцию
- * removeClassAriaHiddenFalse. Открывает окно персонажа
- *
- * @return {undefined} - выход из функции
- */
+// при нажатии Enter, вызывает функциютremoveClassAriaHiddenFalse.
+// Открывает окно персонажа
 setupOpenIcon.addEventListener('keydown', function () {
   if (event.keyCode === ENTER_KEY_CODE) {
     removeClassAriaHiddenFalse(setup, 'invisible');
   }
 });
 
-/**
- * anonymous function -  при клике, вызывает функцию addClassAriaHidden.
- * Закрывает окно персонажа
- *
- * @return {type}  description
- */
+// при клике, вызывает функцию addClassAriaHidden. Закрывает окно персонажа.
 setupClose.addEventListener('click', function () {
   addClassAriaHidden(setup, 'invisible');
 });
 
-/**
- * anonymous function - при нажатии Enter, вызывает функции addClassAriaHidden.
- * Закрывает окно персонажа
- *
- * @return {undefined} - выход из функции
- */
+// при нажатии Enter, вызывает функции addClassAriaHidden.
+// Закрывает окно персонажа
 setupClose.addEventListener('keydown', function () {
   if (event.keyCode === ENTER_KEY_CODE) {
     addClassAriaHidden(setup, 'invisible');
   }
-  return;
 });
 
-/**
- * anonymous function - при клике, вызывает функцию addClassAriaHidden.
- * Закрывает окно персонажа
- *
- * @return {undefined} - выход из функции
- */
+// при клике, вызывает функцию addClassAriaHidden. Закрывает окно персонажа
 setupSaveButton.addEventListener('click', function () {
   addClassAriaHidden(setup, 'invisible');
 });
 
-/**
- * anonymous function - при нажатии Enter, вызывает функцию addClassAriaHidden.
- * Закрывает окно персонажа
- *
- * @return {undefined} - выход из функции
- */
+// при нажатии Enter, вызывает функцию addClassAriaHidden.
+// Закрывает окно персонажа
 setupSaveButton.addEventListener('keydown', function () {
   if (event.keyCode === ENTER_KEY_CODE) {
     addClassAriaHidden(setup, 'invisible');
   }
-  return;
 });
 
-/**
- * anonymous function - при нажатии ESC закрывает окно редактирования персонажа
- *
- * @return {undefined} - выход из функции
- */
+// при нажатии ESC закрывает окно редактирования персонажа
 window.addEventListener('keydown', function () {
   if (event.keyCode === ESC_KEY_CODE) {
-    if (setup.classList.contains('invisible')) {
-      return;
-    } else {
+    if (!setup.classList.contains('invisible')) {
       addClassAriaHidden(setup, 'invisible');
     }
-  } else {
-    return;
   }
 });
 
