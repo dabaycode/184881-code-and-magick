@@ -3,6 +3,8 @@
 var setupOpen = document.querySelector('.setup-open');
 var setup = document.querySelector('.setup');
 var setupClose = setup.querySelector('.setup-close');
+var setupOpenIcon = setupOpen.querySelector('.setup-open-icon');
+var setupSaveButton = setup.querySelector('.setup-submit');
 var wizardCoat = document.querySelector('#wizard-coat');
 var wizardEyes = document.querySelector('#wizard-eyes');
 var setupFireball = document.querySelector('.setup-fireball-wrap');
@@ -28,6 +30,8 @@ var fireballColors = [
   '#e848d5',
   '#e6e848'
 ];
+var ENTER_KEY_CODE = 13;
+var ESC_KEY_CODE = 27;
 
 /**
  * anonymous function - Возвращает индекс рандомного элемента массива.
@@ -38,7 +42,6 @@ var fireballColors = [
 var randomColorIndex = function (colorsArray) {
   return (Math.floor(Math.random() * colorsArray.length));
 };
-
 
 /**
  * randomColor - меняет фоновый цвет элемента.
@@ -60,25 +63,113 @@ function randomColor(changedNode, colorsArray, prop, event) {
   return;
 }
 
+/**
+ * removeClassAriaHiddenFalse - Удаляет класс у переданного элемента. Устанавливает
+ * значение атрибута aria-hidden на false
+ *
+ * @param  {object} node - DOM - элемент
+ * @param  {string} delClass - Класс, которые необходимо удалить
+ */
+function removeClassAriaHiddenFalse(node, delClass) {
+  node.classList.remove(delClass);
+  node.setAttribute('aria-hidden', false);
+}
 
 /**
- * anonymous function - открывает окно персонажа. Удаляет класс invisible.
+ * addClassAriaHidden - Добавляе класс переданному элементу. Устанавливает
+ * значение атрибута aria-hidden на true
+ *
+ * @param  {object} node - DOM - элемент
+ * @param  {string} newClass - Класс, которые необходимо добавить
+ */
+function addClassAriaHidden(node, newClass) {
+  node.classList.add(newClass);
+  node.setAttribute('aria-hidden', true);
+}
+
+/**
+ * anonymous function -  при клике, вызывает функцию addClassAriaHidden.
+ * Закрывает окно персонажа
  *
  */
 setupOpen.addEventListener('click', function () {
-  setup.classList.remove('invisible');
+  removeClassAriaHiddenFalse(setup, 'invisible');
 });
 
+/**
+ * anonymous function - при нажатии Enter, вызывает функцию
+ * removeClassAriaHiddenFalse. Открывает окно персонажа
+ *
+ * @return {undefined} - выход из функции
+ */
+setupOpenIcon.addEventListener('keydown', function () {
+  if (event.keyCode === ENTER_KEY_CODE) {
+    removeClassAriaHiddenFalse(setup, 'invisible');
+  }
+});
 
 /**
- * anonymous function - закрывает окно персонажа. Добавляет класс invisible.
+ * anonymous function -  при клике, вызывает функцию addClassAriaHidden.
+ * Закрывает окно персонажа
  *
  * @return {type}  description
  */
 setupClose.addEventListener('click', function () {
-  setup.classList.add('invisible');
+  addClassAriaHidden(setup, 'invisible');
 });
 
+/**
+ * anonymous function - при нажатии Enter, вызывает функции addClassAriaHidden.
+ * Закрывает окно персонажа
+ *
+ * @return {undefined} - выход из функции
+ */
+setupClose.addEventListener('keydown', function () {
+  if (event.keyCode === ENTER_KEY_CODE) {
+    addClassAriaHidden(setup, 'invisible');
+  }
+  return;
+});
+
+/**
+ * anonymous function - при клике, вызывает функцию addClassAriaHidden.
+ * Закрывает окно персонажа
+ *
+ * @return {undefined} - выход из функции
+ */
+setupSaveButton.addEventListener('click', function () {
+  addClassAriaHidden(setup, 'invisible');
+});
+
+/**
+ * anonymous function - при нажатии Enter, вызывает функцию addClassAriaHidden.
+ * Закрывает окно персонажа
+ *
+ * @return {undefined} - выход из функции
+ */
+setupSaveButton.addEventListener('keydown', function () {
+  if (event.keyCode === ENTER_KEY_CODE) {
+    addClassAriaHidden(setup, 'invisible');
+  }
+  return;
+});
+
+/**
+ * anonymous function - при нажатии ESC закрывает окно редактирования персонажа
+ *
+ * @return {undefined} - выход из функции
+ */
+window.addEventListener('keydown', function () {
+  if (event.keyCode === ESC_KEY_CODE) {
+    if (setup.classList.contains('invisible')) {
+      return;
+    } else {
+      addClassAriaHidden(setup, 'invisible');
+    }
+  } else {
+    return;
+  }
+});
 
 /**
  * Вызывает функцию randomColor при событии click на элемент с #wizardCoat.
